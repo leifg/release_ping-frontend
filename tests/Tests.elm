@@ -18,7 +18,9 @@ all =
         describe "Fake Model"
             [ test "Elixir" <|
                 \_ ->
-                    Expect.equal "Elixir" elixir.name
+                    Expect.equal
+                        "Elixir"
+                        elixir.name
             , test "Erlang" <|
                 \_ ->
                     Expect.equal "Erlang" erlang.name

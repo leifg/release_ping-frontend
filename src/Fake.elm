@@ -41,5 +41,11 @@ apache_license : License
 apache_license =
     { spdx_id = "Apache-2.0"
     , name = "Apache License 2.0"
-    , more_info = "https://choosealicense.com/licenses/apache-2.0/"
+    }
+
+
+mit_license : License
+mit_license =
+    { spdx_id = "MIT"
+    , name = "MIT License"
     }
