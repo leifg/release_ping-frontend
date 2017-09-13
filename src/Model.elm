@@ -21,7 +21,6 @@ type alias Software =
 type alias License =
     { spdx_id : String
     , name : String
-    , more_info : String
     }
 
 

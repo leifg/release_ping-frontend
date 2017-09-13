@@ -32,27 +32,40 @@ update msg model =
     ( model, Cmd.none )
 
 
-viewLicense : License -> String
+viewLicenses : List License -> Html Msg
+viewLicenses licenses =
+    div [] (List.map viewLicense licenses)
+
+
+viewLicense : License -> Html Msg
 viewLicense license =
-    license.name
+    span []
+        [ a [ href ("https://choosealicense.com/licenses/" ++ (String.toLower license.spdx_id)) ]
+            [ text license.name ]
+        ]
+
+
+viewVersion : Version -> Html Msg
+viewVersion version =
+    a [ href version.release_notes_url ]
+        [ text version.name ]
 
 
 viewSoftware : Software -> Html Msg
 viewSoftware software =
     tr []
         [ td [] [ text software.name ]
-        , td [] [ text software.latest_version_stable.name ]
-        , td [] [ text software.latest_version_unstable.name ]
-        , td [] [ text (String.join ", " (List.map viewLicense software.licenses)) ]
+        , td [] [ viewVersion software.latest_version_stable ]
+        , td [] [ viewVersion software.latest_version_unstable ]
+        , td [] [ (viewLicenses software.licenses) ]
         ]
 
 
 viewModel : Model -> Html Msg
 viewModel model =
     table
-        [ class "uk-table" ]
-        [ caption [] [ text "Software" ]
-        , thead []
+        [ class "uk-table uk-table-striped uk-table-small" ]
+        [ thead []
             [ tr []
                 [ th [] [ text "Name" ]
                 , th [] [ text "Latest Version Stable" ]
@@ -70,7 +83,10 @@ viewModel model =
 
 view : Model -> Html Msg
 view model =
-    div [] [ viewModel model ]
+    div []
+        [ h1 [] [ text "Software" ]
+        , viewModel model
+        ]
 
 
 
