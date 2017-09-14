@@ -3,7 +3,8 @@ module Main exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Model exposing (..)
-import Fake exposing (..)
+import Json.Decode exposing (..)
+import Http
 
 
 ---- MODEL ----
@@ -11,12 +12,12 @@ import Fake exposing (..)
 
 initialModel : Model
 initialModel =
-    { software = [ Fake.elixir, Fake.erlang ] }
+    { software = [] }
 
 
 init : ( Model, Cmd Msg )
 init =
-    ( initialModel, Cmd.none )
+    ( initialModel, fetchSoftware )
 
 
 
@@ -24,12 +25,25 @@ init =
 
 
 type Msg
-    = NoOp
+    = LoadSoftware (Result Http.Error (List Software))
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    ( model, Cmd.none )
+    case msg of
+        LoadSoftware (Ok software) ->
+            ( { model | software = software }, Cmd.none )
+
+        LoadSoftware (Err error) ->
+            let
+                _ =
+                    Debug.log "Oops!" error
+            in
+                ( model, Cmd.none )
+
+
+
+---- VIEW ----
 
 
 viewLicenses : List License -> Html Msg
@@ -87,6 +101,72 @@ view model =
         [ h1 [] [ text "Software" ]
         , viewModel model
         ]
+
+
+
+---- COMMANDS ----
+
+
+softwareBaseUri : String
+softwareBaseUri =
+    "http://localhost:5000/software"
+
+
+fetchSoftware : Cmd Msg
+fetchSoftware =
+    Json.Decode.list softwareDecoder
+        |> Http.get softwareBaseUri
+        |> Http.send LoadSoftware
+
+
+
+---- DECODER ----
+
+
+softwareDecoder : Decoder Software
+softwareDecoder =
+    map6 Software idDecoder nameDecoder websiteDecoder licensesDecoder (versionDecoder "latest_version_stable") (versionDecoder "latest_version_unstable")
+
+
+idDecoder : Decoder String
+idDecoder =
+    field "id" string
+
+
+nameDecoder : Decoder String
+nameDecoder =
+    field "name" string
+
+
+spdxIdDecoder : Decoder String
+spdxIdDecoder =
+    field "spdx_id" string
+
+
+websiteDecoder : Decoder String
+websiteDecoder =
+    field "website" string
+
+
+releaseNotesUrlDecoder : Decoder String
+releaseNotesUrlDecoder =
+    field "release_notes_url" string
+
+
+versionDecoder : String -> Decoder Version
+versionDecoder fieldName =
+    field fieldName
+        (map2 Version nameDecoder releaseNotesUrlDecoder)
+
+
+licensesDecoder : Decoder (List License)
+licensesDecoder =
+    field "licenses" (Json.Decode.list licenseDecoder)
+
+
+licenseDecoder : Decoder License
+licenseDecoder =
+    map2 License spdxIdDecoder nameDecoder
 
 
 
