@@ -12,7 +12,10 @@
       "release_notes_url": "https://github.com/elixir-lang/elixir/releases/tag/v1.5.1"
     },
     "licenses": [
-      "Apache-2.0"
+      {
+        "spdx_id": "Apache-2.0",
+        "name": "Apache License 2.0"
+      }
     ]
   },
   {
@@ -28,7 +31,10 @@
       "release_notes_url": "https://github.com/erlang/otp/releases/tag/OTP-20.0.4"
     },
     "licenses": [
-      "Apache-2.0"
+      {
+        "spdx_id": "Apache-2.0",
+        "name": "Apache License 2.0"
+      }
     ]
   }
 ]
