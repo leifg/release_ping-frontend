@@ -4,12 +4,16 @@
     "name": "Elixir",
     "website": "https://elixir-lang.org",
     "latest_version_stable": {
+      "id": "382d3a8f-0670-4291-a33a-bf0629e41cce",
       "name": "1.5.1",
-      "release_notes_url": "https://github.com/elixir-lang/elixir/releases/tag/v1.5.1"
+      "release_notes_url": "https://github.com/elixir-lang/elixir/releases/tag/v1.5.1",
+      "published_at": "2017-07-25T07:27:16.000Z",
     },
     "latest_version_unstable": {
+      "id": "382d3a8f-0670-4291-a33a-bf0629e41cce",
       "name": "1.5.1",
-      "release_notes_url": "https://github.com/elixir-lang/elixir/releases/tag/v1.5.1"
+      "release_notes_url": "https://github.com/elixir-lang/elixir/releases/tag/v1.5.1",
+      "published_at": "2017-07-25T07:27:16.000Z",
     },
     "licenses": [
       {
