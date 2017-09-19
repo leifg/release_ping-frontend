@@ -109,13 +109,13 @@ view model =
 
 softwareBaseUri : String
 softwareBaseUri =
-    "http://localhost:5000/software"
+    "http://localhost:4000/api"
 
 
 fetchSoftware : Cmd Msg
 fetchSoftware =
     Json.Decode.list softwareDecoder
-        |> Http.get softwareBaseUri
+        |> Http.get (softwareBaseUri ++ "/software")
         |> Http.send LoadSoftware
 
 
