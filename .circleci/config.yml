@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: node:8.2.1
+      - image: leifg/release_ping-frontend
     steps:
       - checkout
       - restore_cache:
