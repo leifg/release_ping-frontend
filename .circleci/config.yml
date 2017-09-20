@@ -12,17 +12,8 @@ jobs:
       - restore_cache:
           key: test-cache-{{ checksum "tests/elm-package.json" }}
       - run:
-          name: Update yarn
-          command: npm install -g yarn
-      - run:
-          name: Install elm-app
-          command: yarn global add create-elm-app
-      - run:
           name: Install Dependencies
           command:  elm-app install -y
-      - run:
-          name: execute Tests
-          command:  elm-app test
       - save_cache:
           key: global-deps-1.4.0
           paths:
@@ -36,3 +27,34 @@ jobs:
           key: test-cache-{{ checksum "tests/elm-package.json" }}
           paths:
             - tests/elm-stuff
+      - persist_to_workspace:
+          root: /
+          paths:
+            - root/project
+  deploy:
+    docker:
+      - image: leifg/release_ping-frontend
+    steps:
+      - attach_workspace:
+          at: /
+      - run:
+          name: Build
+          command: elm-app build
+      - run:
+          name: Push to S3
+          command: aws s3 sync build s3://release-ping-assets
+      - run:
+          name: Semantic Release
+          command: semantic-release -slug leifg/release_ping-frontend -noci || true
+
+workflows:
+  version: 2
+  build-test-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
