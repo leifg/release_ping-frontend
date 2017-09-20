@@ -1,8 +1,10 @@
 {
+  "license": "SEE LICENSE IN LICENSE",
   "scripts": {
     "fake_api": "canned -p 5000 ./canned_responses"
   },
-  "dependencies": {
+  "devDependencies": {
+    "webpack": "^3.6.0",
     "canned": "^0.3.10"
   }
 }
