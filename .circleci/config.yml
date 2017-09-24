@@ -42,7 +42,7 @@ jobs:
           command: elm-app build
       - run:
           name: Push to S3
-          command: aws s3 sync build s3://release-ping-assets
+          command: aws s3 sync --acl public-read build s3://release-ping-assets
       - run:
           name: Semantic Release
           command: semantic-release -slug leifg/release_ping-frontend -noci || true
