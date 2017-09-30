@@ -109,7 +109,7 @@ view model =
 
 softwareBaseUri : String
 softwareBaseUri =
-    "http://localhost:4000/api"
+    "https://api.releaseping.com"
 
 
 fetchSoftware : Cmd Msg
