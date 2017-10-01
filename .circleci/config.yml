@@ -12,8 +12,17 @@ jobs:
       - restore_cache:
           key: test-cache-{{ checksum "tests/elm-package.json" }}
       - run:
+          name: Update yarn
+          command: npm install -g yarn
+      - run:
+          name: Install elm-app
+          command: yarn global add create-elm-app
+      - run:
           name: Install Dependencies
           command:  elm-app install -y
+      - run:
+          name: execute Tests
+          command:  elm-app test
       - save_cache:
           key: global-deps-1.4.0
           paths:
