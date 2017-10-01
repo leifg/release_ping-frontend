@@ -6,7 +6,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: global-deps-1.4.0
+          key: global-deps-1.5.0
       - restore_cache:
           key: build-cache-{{ checksum "elm-package.json" }}
       - restore_cache:
@@ -24,7 +24,7 @@ jobs:
           name: execute Tests
           command:  elm-app test
       - save_cache:
-          key: global-deps-1.4.0
+          key: global-deps-1.5.0
           paths:
             - /root/.config/yarn/global/yarn.lock
             - /root/.cache/yarn
