@@ -10,14 +10,16 @@ import Http
 ---- MODEL ----
 
 
-initialModel : Model
-initialModel =
-    { software = [] }
+initialModel : Config -> Model
+initialModel config =
+    { software = []
+    , config = config
+    }
 
 
-init : ( Model, Cmd Msg )
-init =
-    ( initialModel, fetchSoftware )
+init : Config -> ( Model, Cmd Msg )
+init config =
+    ( initialModel config, (fetchSoftware config.url) )
 
 
 
@@ -120,10 +122,10 @@ softwareBaseUri =
     "https://api.releaseping.com"
 
 
-fetchSoftware : Cmd Msg
-fetchSoftware =
+fetchSoftware : String -> Cmd Msg
+fetchSoftware apiUrl =
     Json.Decode.list softwareDecoder
-        |> Http.get (softwareBaseUri ++ "/software")
+        |> Http.get (apiUrl ++ "/software")
         |> Http.send LoadSoftware
 
 
@@ -181,9 +183,9 @@ licenseDecoder =
 ---- PROGRAM ----
 
 
-main : Program Never Model Msg
+main : Program Config Model Msg
 main =
-    Html.program
+    Html.programWithFlags
         { view = view
         , init = init
         , update = update

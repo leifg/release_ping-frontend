@@ -3,8 +3,14 @@ module Model exposing (..)
 -- API Return
 
 
+type alias Config =
+    { url : String
+    }
+
+
 type alias Model =
     { software : List Software
+    , config : Config
     }
 
 
