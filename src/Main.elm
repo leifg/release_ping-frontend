@@ -59,6 +59,14 @@ viewLicense license =
         ]
 
 
+viewSoftwareName : Software -> Html Msg
+viewSoftwareName software =
+    span []
+        [ a [ href software.website ]
+            [ text software.name ]
+        ]
+
+
 viewVersion : Version -> Html Msg
 viewVersion version =
     a [ href version.release_notes_url ]
@@ -68,7 +76,7 @@ viewVersion version =
 viewSoftware : Software -> Html Msg
 viewSoftware software =
     tr []
-        [ td [] [ text software.name ]
+        [ td [] [ viewSoftwareName software ]
         , td [] [ viewVersion software.latest_version_stable ]
         , td [] [ viewVersion software.latest_version_unstable ]
         , td [] [ (viewLicenses software.licenses) ]
