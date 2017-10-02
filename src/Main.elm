@@ -87,8 +87,21 @@ viewSoftware software =
 
 viewModel : Model -> Html Msg
 viewModel model =
-    table
-        [ class "uk-table uk-table-striped uk-table-small" ]
+    div []
+        [ viewSoftwareTable model
+        , viewAppVersion model.config
+        ]
+
+
+viewAppVersion : Config -> Html Msg
+viewAppVersion config =
+    div [ class "uk-text-small uk-position-small uk-position-bottom-right", id "appVersion" ]
+        [ text config.version ]
+
+
+viewSoftwareTable : Model -> Html Msg
+viewSoftwareTable model =
+    table [ class "uk-table uk-table-striped uk-table-small" ]
         [ thead []
             [ tr []
                 [ th [] [ text "Name" ]
