@@ -47,11 +47,11 @@ jobs:
       - attach_workspace:
           at: /
       - run:
-          name: Build
-          command: elm-app build
+          name: Determine Version
+          command: deployment/determine_version.sh
       - run:
-          name: Push to S3
-          command: aws s3 sync --acl public-read build s3://release-ping-assets
+          name: Run Deployment
+          command: deployment/deploy.sh
       - run:
           name: Semantic Release
           command: semantic-release -slug leifg/release_ping-frontend -noci || true
