@@ -19,7 +19,7 @@ initialModel config =
 
 init : Config -> ( Model, Cmd Msg )
 init config =
-    ( initialModel config, (fetchSoftware config.url) )
+    ( initialModel config, (fetchSoftware config.api_url) )
 
 
 
