@@ -130,11 +130,6 @@ view model =
 ---- COMMANDS ----
 
 
-softwareBaseUri : String
-softwareBaseUri =
-    "https://api.releaseping.com"
-
-
 fetchSoftware : String -> Cmd Msg
 fetchSoftware apiUrl =
     Json.Decode.list softwareDecoder
