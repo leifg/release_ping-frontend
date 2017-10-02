@@ -5,6 +5,7 @@ module Model exposing (..)
 
 type alias Config =
     { api_url : String
+    , version : String
     }
 
 
