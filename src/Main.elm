@@ -95,7 +95,7 @@ viewModel model =
 
 viewAppVersion : Config -> Html Msg
 viewAppVersion config =
-    div [ class "uk-text-small uk-position-small uk-position-bottom-right", id "appVersion" ]
+    div [ class "uk-text-small uk-text-muted uk-position-small uk-position-bottom-right", id "appVersion" ]
         [ text config.version ]
 
 
