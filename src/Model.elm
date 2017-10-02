@@ -4,7 +4,7 @@ module Model exposing (..)
 
 
 type alias Config =
-    { url : String
+    { api_url : String
     }
 
 
