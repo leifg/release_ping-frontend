@@ -50,7 +50,7 @@ update msg model =
 
 viewLicenses : List License -> Html Msg
 viewLicenses licenses =
-    div [] (List.map viewLicense licenses)
+    div [] (List.intersperse (br [] []) (List.map viewLicense licenses))
 
 
 viewLicense : License -> Html Msg
