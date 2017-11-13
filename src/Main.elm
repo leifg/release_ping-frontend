@@ -56,7 +56,7 @@ viewLicenses licenses =
 viewLicense : License -> Html Msg
 viewLicense license =
     span []
-        [ a [ href ("https://choosealicense.com/licenses/" ++ (String.toLower license.spdx_id)) ]
+        [ a [ href ("https://choosealicense.com/licenses/" ++ (String.toLower license.spdx_id)), target "_blank" ]
             [ text license.name ]
         ]
 
@@ -64,14 +64,14 @@ viewLicense license =
 viewSoftwareName : Software -> Html Msg
 viewSoftwareName software =
     span []
-        [ a [ href software.website ]
+        [ a [ href software.website, target "_blank" ]
             [ text software.name ]
         ]
 
 
 viewVersion : Version -> Html Msg
 viewVersion version =
-    a [ href version.release_notes_url ]
+    a [ href version.release_notes_url, target "_blank" ]
         [ text version.name ]
 
 
