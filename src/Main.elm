@@ -87,7 +87,7 @@ viewSoftware software =
 
 viewModel : Model -> Html Msg
 viewModel model =
-    div []
+    div [ class "uk-width-5-6 uk-align-center"]
         [ viewSoftwareTable model
         , viewAppVersion model.config
         ]
@@ -95,7 +95,7 @@ viewModel model =
 
 viewAppVersion : Config -> Html Msg
 viewAppVersion config =
-    div [ class "uk-text-small uk-text-muted uk-position-small uk-position-bottom-right", id "appVersion" ]
+    div [ class "uk-position-fixed uk-text-small uk-text-muted uk-position-small uk-position-bottom-right", id "appVersion" ]
         [ text config.version ]
 
 
