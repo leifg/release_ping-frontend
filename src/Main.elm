@@ -125,7 +125,7 @@ viewSoftwareTable model =
 view : Model -> Html Msg
 view model =
     div []
-        [ h1 [] [ text "Software" ]
+        [ img [class "uk-align-center", src "logo.png"] []
         , viewModel model
         ]
 
