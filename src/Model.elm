@@ -10,7 +10,8 @@ type alias Config =
 
 
 type alias Model =
-    { software : List Software
+    { loaded : Bool
+    , software : List Software
     , config : Config
     }
 

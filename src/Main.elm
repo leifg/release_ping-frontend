@@ -12,7 +12,8 @@ import Http
 
 initialModel : Config -> Model
 initialModel config =
-    { software = []
+    { loaded = False
+    , software = []
     , config = config
     }
 
@@ -34,7 +35,7 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         LoadSoftware (Ok software) ->
-            ( { model | software = software }, Cmd.none )
+            ( { model | loaded = True, software = software }, Cmd.none )
 
         LoadSoftware (Err error) ->
             let
@@ -87,10 +88,13 @@ viewSoftware software =
 
 viewModel : Model -> Html Msg
 viewModel model =
-    div [ class "uk-width-5-6 uk-align-center"]
-        [ viewSoftwareTable model
-        , viewAppVersion model.config
-        ]
+    if model.loaded then
+        div [ class "uk-width-5-6 uk-align-center" ]
+            [ viewSoftwareTable model
+            , viewAppVersion model.config
+            ]
+    else
+        div [ class "uk-width-5-6 uk-align-center" ] [ i [ class "fas fa-sync fa-spin uk-align-center" ] [] ]
 
 
 viewAppVersion : Config -> Html Msg
