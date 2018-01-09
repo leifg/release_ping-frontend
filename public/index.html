@@ -5,10 +5,10 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/css/uikit.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/js/uikit-icons.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/js/uikit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/js/uikit-icons.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/css/uikit.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.3/js/all.js"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109615056-1"></script>
@@ -23,8 +23,60 @@
 </head>
 <body>
     <noscript>
-        You need to enable JavaScript to run this app.
+        You need to enable JavaScript to see the latest versions.
     </noscript>
-    <div id="root"></div>
+    <div id="root" class="main"></div>
+    <div id="footer" class="footer">
+        <ul class="uk-subnav uk-subnav-divider" uk-margin>
+            <li><a href="#" uk-toggle="target: #contact">Contact</a></li>
+            <li><a href="https://twitter.com/releaseping" uk-icon="icon: twitter" target="_blank"></a></li>
+            <li><a href="https://linkedin.com/in/lgensert" uk-icon="icon: linkedin" target="_blank"></a></li>
+            <li><a href="https://leif.io" uk-icon="icon: user" target="_blank"></a></li>
+        </ul>
+    </div>
+    <script>
+    if(window.location.hash === "#post-signup") {
+      UIkit.notification({
+        message: "Thank you for your feedback!",
+        pos: "top-center",
+        timeout: 5000
+      });
+    };
+    </script>
+    <div id="contact" uk-modal>
+        <div class="uk-modal-dialog uk-modal-body">
+          <button class="uk-modal-close-default" type="button" uk-close></button>
+          <h2 class="uk-modal-title" data-drip-attribute="headline">Feedback</h2>
+          <form action="https://www.getdrip.com/forms/85719867/submissions" method="post" data-drip-embedded-form="85719867">
+            <fieldset class="uk-fieldset">
+                <div class="uk-margin">
+                  <div class="uk-inline">
+                    <a class="uk-form-icon" href="#" uk-icon="icon: user"></a>
+                    <input class="uk-input" name="fields[name]" type="text" placeholder="Full Name">
+                  </div>
+                </div>
+
+                <div class="uk-margin">
+                  <div class="uk-inline">
+                    <a class="uk-form-icon" href="#" uk-icon="icon: mail"></a>
+                    <input class="uk-input" name="fields[email]" type="email" placeholder="Email">
+                  </div>
+                </div>
+
+                <div class="uk-margin">
+                  <textarea class="uk-textarea" rows="5" placeholder="Your Message" name="fields[message]"></textarea>
+                </div>
+
+                <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+                    <label><input class="uk-checkbox" name="fields[optin]" type="checkbox" checked> Subscribe to Newsletter</label>
+                </div>
+
+                <div class="uk-margin">
+                  <button class="uk-button uk-button-default" data-drip-attribute="sign-up-button">Submit</button>
+                </div>
+            </fieldset>
+          </form>
+        </div>
+    </div>
 </body>
 </html>
